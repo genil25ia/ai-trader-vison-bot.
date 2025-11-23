@@ -72,16 +72,14 @@ def main():
     application = Application.builder().token(TOKEN).build()
 
     # Adiciona os comandos
-    application.add_handler(CommandHandler("start", start))
-    # Opcional: responde a textos comuns
+    application.add_handler(CommandHandler("start", comecar))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
-    # Inicia o Bot
     logger.info("Bot iniciado. Aguardando comandos...")
-    
-application.run_polling()
+
+    application.run_polling()
 
 
-if__name__=='__main__': # LINHA 83
+if __name__=='__main__': # LINHA 83
     keep_alive()           # Inicia o servidor web em segundo plano
     main()                 # Inicia o bot (que chama o application.run_polling())
