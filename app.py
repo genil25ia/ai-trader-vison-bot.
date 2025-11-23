@@ -10,10 +10,10 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
+# Solução definitiva para o erro de 'name' não definido
 logger = logging.getLogger("BotTrader")
 
 # --- VARIÁVEIS DE AMBIENTE ---
-# O Railway vai injetar esses valores. Se rodar local, ele avisa que falta.
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
@@ -25,7 +25,7 @@ def home():
     return "🤖 AI Trader Vision Bot está ONLINE e operando!"
 
 def run_http():
-    # O Railway define a porta automaticamente na variável PORT, ou usa 8080
+    # O Railway define a porta automaticamente na variável PORT
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
 
@@ -37,6 +37,12 @@ def keep_alive():
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Responde ao comando /start"""
+    # Verifica se o chat ID do usuário corresponde ao ID configurado
+    if str(update.message.chat_id) != CHAT_ID:
+        logger.info(f"Tentativa de acesso não autorizado do chat ID: {update.message.chat_id}")
+        await update.message.reply_text("Acesso não autorizado.")
+        return
+
     await update.message.reply_text(
         "Olá! Sou o AI Trader Vision Bot. 🚀\n"
         "Estou monitorando o mercado e conectado ao servidor."
@@ -44,15 +50,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """(Opcional) Responde qualquer mensagem de texto para testar"""
+    if str(update.message.chat_id) != CHAT_ID:
+        return
     await update.message.reply_text(f"Recebi sua mensagem: {update.message.text}")
 
 # AQUI VOCÊ PODE COLOCAR SUA LÓGICA DE ANÁLISE DE IMAGEM / OPENAI
-# Se você tiver a função de análise pronta, adicione ela aqui e crie um Handler.
 
 def main():
     """Inicia o bot"""
     if not TOKEN:
-        print("ERRO: A variável TELEGRAM_BOT_TOKEN não foi encontrada.")
+        logger.error("ERRO: A variável TELEGRAM_BOT_TOKEN não foi encontrada.")
         return
 
     # Cria a aplicação
@@ -64,11 +71,10 @@ def main():
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     # Inicia o Bot
-    print("Bot iniciado...")
+    logger.info("Bot iniciado. Aguardando comandos...")
     application.run_polling()
 
 if name == 'main':
-    # 1. Inicia o servidor web em segundo plano
-    keep_alive()
-    # 2. Inicia o bot
-    main()
+    # Bloco de inicialização corrigido (linha 70)
+    keep_alive() # Inicia o servidor web em segundo plano
+    main()       # Inicia o bot
