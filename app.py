@@ -36,7 +36,7 @@ def keep_alive():
 # --- PARTE 2: LÓGICA DO BOT ---
 
 # APROX. LINHA 40
-Async def comecar(atualizacao: Atualizacao, contexto: ContextTypes.DEFAULT_TYPE):
+async def comecar(atualizacao: Atualizacao, contexto: ContextTypes.DEFAULT_TYPE):
     """Responde o comando /start"""
     # Verifica se o chat ID do usuário corresponde ao ID configurado
     # se Str(atualizacao.Mensagem.chat_id) != CHAT_ID:
