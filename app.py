@@ -74,7 +74,8 @@ def main():
     logger.info("Bot iniciado. Aguardando comandos...")
     application.run_polling()
 
-if _name_ == '_main_':
-    # Bloco de inicialização corrigido (linha 70)
-    keep_alive() # Inicia o servidor web em segundo plano
-    main()       # Inicia o bot
+if_name_== '_main_':
+
+    keep_alive()
+
+    main()
