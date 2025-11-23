@@ -73,7 +73,7 @@ def main():
     # Inicia o Bot
     logger.info("Bot iniciado. Aguardando comandos...")
     application.run_polling()
-
+application.run_polling()
 if_name_== '_main_':
 
     keep_alive()
