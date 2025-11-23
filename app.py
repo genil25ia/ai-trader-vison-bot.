@@ -68,7 +68,7 @@ def main():
     application.run_polling()
 
 if name == 'main':
-    # 1. Inicia o servidor web em segundo plano (para o UptimeRobot)
+    # 1. Inicia o servidor web em segundo plano
     keep_alive()
-    # 2. Inicia o bot do Telegram (Bloqueia o código aqui para rodar o loop)
+    # 2. Inicia o bot
     main()
