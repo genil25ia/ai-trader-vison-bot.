@@ -46,15 +46,14 @@ async def comecar(atualizacao: Atualizacao, contexto: ContextTypes.DEFAULT_TYPE)
     #     # GARANTA que a linha abaixo, se existir, ESTEJA APAGADA:
     #     # retornar
 
-    esperar atualizacao.Mensagem.reply_text(
-        "Olá! Sou o AI Trader Vision Bot. \n"
-        "Estou monitorando e conectado ao servidor."
-    )
+    await atualizacao.Mensagem.reply_text(
+    "Olá! Sou o AI Trader Vision Bot. \n"
+    "Estou monitorando e conectado ao servidor."
+)
 
-    await update.message.reply_text(
-        "Olá! Sou o AI Trader Vision Bot. 🚀\n"
-        "Estou monitorando o mercado e conectado ao servidor."
-    )
+    
+    await atualizacao.Mensagem.reply_text(f"Recebi sua mensagem: {atualizacao.Mensagem.texto}")
+    
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """(Opcional) Responde qualquer mensagem de texto para testar"""
