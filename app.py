@@ -35,13 +35,21 @@ def keep_alive():
 
 # --- PARTE 2: LÓGICA DO BOT ---
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Responde ao comando /start"""
+# APROX. LINHA 40
+Async def comecar(atualizacao: Atualizacao, contexto: ContextTypes.DEFAULT_TYPE):
+    """Responde o comando /start"""
     # Verifica se o chat ID do usuário corresponde ao ID configurado
-    if str(update.message.chat_id) != CHAT_ID:
-        logger.info(f"Tentativa de acesso não autorizado do chat ID: {update.message.chat_id}")
-        await update.message.reply_text("Acesso não autorizado.")
-        return
+    # se Str(atualizacao.Mensagem.chat_id) != CHAT_ID:
+    #     madeireiro.informacao(f"Tentativa de acesso não autorizado do chat ID: {atualizacao.Mensagem.chat_id}")
+    #     esperar atualizacao.Mensagem.reply_text("Acesso não autorizado.")
+    #
+    #     # GARANTA que a linha abaixo, se existir, ESTEJA APAGADA:
+    #     # retornar
+
+    esperar atualizacao.Mensagem.reply_text(
+        "Olá! Sou o AI Trader Vision Bot. \n"
+        "Estou monitorando e conectado ao servidor."
+    )
 
     await update.message.reply_text(
         "Olá! Sou o AI Trader Vision Bot. 🚀\n"
