@@ -51,7 +51,6 @@ async def comecar(atualizacao: Atualizacao, contexto: ContextTypes.DEFAULT_TYPE)
     "Estou monitorando e conectado ao servidor."
 )
 
-    
     await atualizacao.Mensagem.reply_text(f"Recebi sua mensagem: {atualizacao.Mensagem.texto}")
     
 
